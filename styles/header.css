@@ -1,6 +1,6 @@
 .site-header {
     background: #35424a;
-    color: white;
+    color: black;
     padding: 1rem 0;
 }
 
@@ -32,7 +32,7 @@
 }
 
 .main-nav a:hover, .main-nav a.active {
-    color: #e8491d;
+    color: #e84;
 }
 
 
