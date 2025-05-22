@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Простая галерея изображений</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #121212;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #f0f0f0;
+  }
+  .gallery-container {
+    max-width: 700px;
+    width: 90%;
+    background: #1e1e1e;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.8);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .gallery-image {
+    width: 100%;
+    max-height: 450px;
+    object-fit: contain;
+    transition: opacity 0.5s ease;
+    border-bottom: 2px solid #333;
+  }
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background: #222;
+  }
+  button {
+    background: #333;
+    border: none;
+    color: #eee;
+    font-size: 1.5rem;
+    padding: 12px 20px;
+    cursor: pointer;
+    flex-grow: 1;
+    transition: background-color 0.3s;
+  }
+  button:hover {
+    background-color: #444;
+  }
+  button:focus {
+    outline: 2px solid #2196f3;
+  }
+</style>
+</head>
+<body>
+  <div class="gallery-container" aria-label="Галерея изображений">
+    <img src="https://picsum.photos/id/1015/700/450" alt="Image 1" class="gallery-image" id="galleryImage" />
+    <div class="controls">
+      <button id="prevBtn" aria-label="Предыдущее изображение">&larr; Назад</button>
+      <button id="nextBtn" aria-label="Следующее изображение">Вперед &rarr;</button>
+    </div>
+  </div>
+
+<script>
+  (function() {
+    const images = [
+      { src: "https://avatars.mds.yandex.net/i?id=c41a7453d55033f41364f8ac5f8fc215e9f8a478-9123766-images-thumbs&n=13", alt: "" },
+      { src: "https://avatars.mds.yandex.net/i?id=1f3f76abe372cd707afc3dd4e5876c3098739722-12423024-images-thumbs&n=13", alt: "" },
+      { src: "https://avatars.mds.yandex.net/i?id=9137c28ad26e98f09b99e483b634d9d7548100ed-4865215-images-thumbs&n=13", alt: "" },
+      { src: "https://avatars.mds.yandex.net/i?id=78f831e43d25ac7ec7357f8afaebb10424bbf43e-13124761-images-thumbs&n=13", alt: "" },
+      { src: "https://avatars.mds.yandex.net/i?id=0d841e90a29277b5eb15bb3c66bf4ea24464eda8-4732791-images-thumbs&n=13", alt: "" }
+    ];
+
+    let currentIndex = 0;
+    const galleryImage = document.getElementById("galleryImage");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    function showImage(index) {
+      galleryImage.style.opacity = 0;
+      setTimeout(() => {
+        galleryImage.src = images[index].src;
+        galleryImage.alt = images[index].alt;
+        galleryImage.style.opacity = 1;
+      }, 300);
+    }
+
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage(currentIndex);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage(currentIndex);
+    });
+  })();
+</script>
+</body>
+</html>
+
+
